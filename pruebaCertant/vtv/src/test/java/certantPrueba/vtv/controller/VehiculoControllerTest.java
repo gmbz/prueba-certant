@@ -88,21 +88,6 @@ public class VehiculoControllerTest {
     }
 
     @Test
-    void testFindUltimaSemana() throws Exception {
-        List<Inspeccion> inspecciones = new ArrayList<>();
-        Inspeccion inspeccion = new Inspeccion();
-        inspeccion.setFecha(LocalDateTime.now());
-        LocalDateTime fechaFin = LocalDateTime.now();
-        LocalDateTime fechaInicio = fechaFin.minusDays(7);
-
-        when(inspeccionRepository.findFechaBetween(fechaInicio, fechaFin))
-                .thenReturn(Arrays.asList(inspeccion));
-        inspecciones = vehiculoController.findUltimaSemana(inspeccionService);
-        assertNotNull(inspecciones);
-        assertEquals(LocalDate.now(), inspecciones.get(0).getFecha());
-    }
-
-    @Test
     void testSave() throws Exception {
         when(vehiculoRepository.save(any(Vehiculo.class))).thenReturn(vehiculo);
         assertNotNull(vehiculoController.save(vehiculoService, vehiculo));
