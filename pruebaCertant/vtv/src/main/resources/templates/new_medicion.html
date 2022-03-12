@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="layout :: head"> </head>
+  <body>
+    <header th:replace="layout :: header"></header>
+
+    <div class="container">
+      <h2 class="text-center">Nueva medicion</h2>
+      <div class="row d-flex justify-content-center">
+        <form
+          th:action="@{/inspecciones/create_medicion}"
+          th:object="${inspeccion}"
+          method="POST"
+          class="col-12"
+        >
+          <input
+            type="hidden"
+            class="form-control"
+            th:field="*{nro_inspeccion}"
+            th:placeholder="${inspeccion.getNro_inspeccion}"
+            th:value="${inspeccion.getNro_inspeccion}"
+          />
+          <div class="form-group">
+            <label for="inputSuspencion">Suspencion</label>
+            <select
+              th:field="*{medicion.suspencion}"
+              id="inputSuspencion"
+              class="form-control"
+            >
+              <option
+                th:each="opcion : ${opciones}"
+                th:value="${opcion}"
+                th:text="${opcion}"
+              ></option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="inputTrenDelantero">Tren delantero</label>
+            <select
+              th:field="*{medicion.tren_delantero}"
+              id="inputTrenDelantero"
+              class="form-control"
+            >
+              <option
+                th:each="opcion : ${opciones}"
+                th:value="${opcion}"
+                th:text="${opcion}"
+              ></option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="inputFrenos">Frenos</label>
+            <select
+              th:field="*{medicion.frenos}"
+              id="inputFrenos"
+              class="form-control"
+            >
+              <option
+                th:each="opcion : ${opciones}"
+                th:value="${opcion}"
+                th:text="${opcion}"
+              ></option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="inputContaminacion">Contaminacion Ambiental</label>
+            <select
+              th:field="*{medicion.contaminacion}"
+              id="inputContaminacion"
+              class="form-control"
+            >
+              <option
+                th:each="opcion : ${opciones}"
+                th:value="${opcion}"
+                th:text="${opcion}"
+              ></option>
+            </select>
+          </div>
+
+          <div class="d-flex justify-content-center mt-3">
+            <button type="submit" class="btn btn-dark">
+              Registrar medicion
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div th:replace="layout :: scripts"></div>
+  </body>
+</html>

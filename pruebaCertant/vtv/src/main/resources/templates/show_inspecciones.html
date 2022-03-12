@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="layout :: head"> </head>
+  <body>
+    <header th:replace="layout :: header"></header>
+
+    <div class="container">
+      <div class="d-flex flex-row pt-2 justify-content-between">
+        <h2 class="d-inline-flex align-middle flex-column">
+          Listado de Inspecciones
+        </h2>
+      </div>
+      <div class="card shadow-sm">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Nro inspeccion</th>
+              <th scope="col">Cliente</th>
+              <th scope="col">Patente vehiculo</th>
+              <th scope="col">Estado</th>
+              <th scope="col">Debe pagar</th>
+              <th scope="col">Fecha</th>
+              <th scope="col">Inspector</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="inspeccion : ${inspecciones}">
+              <th scope="row" th:text="${inspeccion.getNro_inspeccion}"></th>
+              <td
+                th:text="${inspeccion.getVehiculo().getCliente().getNombre}"
+              ></td>
+              <td th:text="${inspeccion.getVehiculo().getPatente}"></td>
+              <td th:text="${inspeccion.getEstado().getDescripcion}"></td>
+              <td>
+                <span
+                  th:if="${inspeccion.isDebe_pagar==true}"
+                  th:text="Si"
+                ></span>
+                <span
+                  th:if="${inspeccion.isDebe_pagar==false}"
+                  th:text="No"
+                ></span>
+              </td>
+              <td
+                th:text="${#temporals.format(inspeccion.getFecha, 'dd-MM-yyyy HH:mm')}"
+              ></td>
+              <td
+                th:text="${inspeccion.getInspector().getNombre} + ' ' + ${inspeccion.getInspector().getApellido}"
+              ></td>
+
+              <td>
+                <a
+                  class="btn btn-warning btn-sm"
+                  th:href="@{/inspecciones/update/{nro_inspeccion}(nro_inspeccion=${inspeccion.getNro_inspeccion})}"
+                  role="button"
+                  >Editar</a
+                >
+                <a
+                  class="btn btn-danger btn-sm"
+                  th:href="@{/inspecciones/delete/{nro_inspeccion}(nro_inspeccion=${inspeccion.getNro_inspeccion})}"
+                  role="button"
+                  >Eliminar</a
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div th:replace="layout :: scripts"></div>
+  </body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="layout :: head"> </head>
+  <body>
+    <header th:replace="layout :: header"></header>
+
+    <div class="container">
+      <div class="d-flex flex-row pt-2 justify-content-between">
+        <h2 class="d-inline-flex align-middle flex-column">
+          Listado de vehiculos inspeccionados la ultima semana
+        </h2>
+      </div>
+      <div class="card shadow-sm">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Patente</th>
+              <th scope="col">Marca</th>
+              <th scope="col">Modelo</th>
+              <th scope="col">Dueño</th>
+              <th scope="col">Fecha</th>
+              <th scope="col">Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="inspeccion : ${inspecciones}">
+              <th
+                scope="row"
+                th:text="${inspeccion.getVehiculo().getPatente}"
+              ></th>
+              <td th:text="${inspeccion.getVehiculo().getMarca}"></td>
+              <td th:text="${inspeccion.getVehiculo().getModelo}"></td>
+              <td
+                th:text="${inspeccion.getVehiculo().getCliente().getNombre}"
+              ></td>
+              <td
+                th:text="${#temporals.format(inspeccion.getFecha(), 'dd-MM-yyyy HH:mm')}"
+              ></td>
+              <td th:text="${inspeccion.getEstado().getDescripcion}"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div th:replace="layout :: scripts"></div>
+  </body>
+</html>

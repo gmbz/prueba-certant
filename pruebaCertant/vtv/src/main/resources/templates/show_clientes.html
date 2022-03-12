@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="layout :: head"> </head>
+  <body>
+    <header th:replace="layout :: header"></header>
+
+    <div class="container">
+      <div class="d-flex flex-row pt-2 justify-content-between">
+        <h2 class="d-inline-flex align-middle flex-column">
+          Listado de Clientes
+        </h2>
+      </div>
+      <div class="card shadow-sm">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Apellido</th>
+              <th scope="col">DNI</th>
+              <th scope="col">Email</th>
+              <th scope="col">Telefono</th>
+              <th scope="col">Datos</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="cliente : ${clientes}">
+              <th scope="row" th:text="${cliente.getId_cliente}"></th>
+              <td th:text="${cliente.getNombre}"></td>
+              <td th:text="${cliente.getApellido}"></td>
+              <td th:text="${cliente.getDni}"></td>
+              <td th:text="${cliente.getEmail}"></td>
+              <td th:text="${cliente.getTelefono}"></td>
+              <td>
+                <a
+                  class="btn btn-info btn-sm"
+                  th:href="@{/clientes/{id_cliente}(id_cliente=${cliente.getId_cliente})}"
+                  role="button"
+                  >VER</a
+                >
+              </td>
+              <td>
+                <a
+                  class="btn btn-warning btn-sm"
+                  th:href="@{/clientes/update/{id_cliente}(id_cliente=${cliente.getId_cliente})}"
+                  role="button"
+                  >Editar</a
+                >
+                <a
+                  class="btn btn-danger btn-sm"
+                  th:href="@{/clientes/delete/{id_cliente}(id_cliente=${cliente.getId_cliente})}"
+                  role="button"
+                  >Eliminar</a
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div th:replace="layout :: scripts"></div>
+  </body>
+</html>

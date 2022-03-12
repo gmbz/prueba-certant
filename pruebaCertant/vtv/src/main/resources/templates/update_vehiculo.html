@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="layout :: head"> </head>
+  <body>
+    <header th:replace="layout :: header"></header>
+
+    <div class="container">
+      <h2 class="text-center">Actualizar vehiculo</h2>
+      <div class="row justify-content-center">
+        <form
+          th:action="@{/vehiculos/update}"
+          th:object="${vehiculo}"
+          method="POST"
+          class="col-8"
+        >
+          <input
+            type="hidden"
+            class="form-control"
+            th:field="*{patente}"
+            th:placeholder="${vehiculo.getPatente}"
+            th:value="${vehiculo.getPatente}"
+          />
+          <div class="form-row">
+            <div class="form-group col">
+              <label for="inputMarca">Nuevo marca</label>
+              <input
+                type="text"
+                class="form-control"
+                id="inputMarca"
+                th:field="*{marca}"
+                th:placeholder="${vehiculo.getMarca}"
+                th:value="${vehiculo.getMarca}"
+              />
+            </div>
+            <div class="form-group col">
+              <label for="inputModelo">Nuevo modelo</label>
+              <input
+                type="text"
+                class="form-control"
+                id="inputApellido"
+                th:field="*{modelo}"
+                th:placeholder="${vehiculo.getModelo}"
+                th:value="${vehiculo.getModelo}"
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inputColor">Nuevo color</label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputColor"
+              th:field="*{color}"
+              th:placeholder="${vehiculo.getColor}"
+              th:value="${vehiculo.getColor}"
+            />
+          </div>
+          <div class="form-group">
+            <label for="inputYear">Nuevo año</label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputYear"
+              th:field="*{year}"
+              th:placeholder="${vehiculo.getYear}"
+              th:value="${vehiculo.getYear}"
+            />
+          </div>
+          <div class="form-group">
+            <label for="inputCliente">Dueño</label>
+            <select
+              th:field="*{cliente}"
+              id="inputCliente"
+              class="form-control"
+            >
+              <option
+                th:each="cliente : ${clientes}"
+                th:value="${cliente.getId_cliente}"
+                th:text="${cliente.getNombre} + ' ' + ${cliente.getApellido}"
+              ></option>
+            </select>
+          </div>
+          <div class="d-flex justify-content-center mt-3">
+            <button type="submit" class="btn btn-dark">Actualizar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div th:replace="layout :: scripts"></div>
+  </body>
+</html>

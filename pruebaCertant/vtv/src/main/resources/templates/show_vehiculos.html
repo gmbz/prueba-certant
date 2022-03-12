@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="layout :: head"> </head>
+  <body>
+    <header th:replace="layout :: header"></header>
+
+    <div class="container">
+      <div class="d-flex flex-row pt-2 justify-content-between">
+        <h2 class="d-inline-flex align-middle flex-column">
+          Listado de Vehiculos
+        </h2>
+      </div>
+      <div class="card shadow-sm">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Patente</th>
+              <th scope="col">Marca</th>
+              <th scope="col">Modelo</th>
+              <th scope="col">Año</th>
+              <th scope="col">Color</th>
+              <th scope="col">Dueño</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="vehiculo : ${vehiculos}">
+              <th scope="row" th:text="${vehiculo.getPatente}"></th>
+              <td th:text="${vehiculo.getMarca}"></td>
+              <td th:text="${vehiculo.getModelo}"></td>
+              <td th:text="${vehiculo.getYear}"></td>
+              <td th:text="${vehiculo.getColor}"></td>
+              <td th:text="${vehiculo.getCliente().getNombre}"></td>
+              <td>
+                <a
+                  class="btn btn-warning btn-sm"
+                  th:href="@{/vehiculos/update/{patente}(patente=${vehiculo.getPatente})}"
+                  role="button"
+                  >Editar</a
+                >
+                <a
+                  class="btn btn-danger btn-sm"
+                  th:href="@{/vehiculos/delete/{patente}(patente=${vehiculo.getPatente})}"
+                  role="button"
+                  >Eliminar</a
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div th:replace="layout :: scripts"></div>
+  </body>
+</html>

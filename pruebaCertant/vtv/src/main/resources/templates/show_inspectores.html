@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="layout :: head"> </head>
+  <body>
+    <header th:replace="layout :: header"></header>
+
+    <div class="container">
+      <div class="d-flex flex-row pt-2 justify-content-between">
+        <h2 class="d-inline-flex align-middle flex-column">
+          Listado de Inspectores
+        </h2>
+      </div>
+      <div class="card shadow-sm">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Legajo</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Apellido</th>
+              <th scope="col">Email</th>
+              <th scope="col">Telefono</th>
+              <th scope="col">Inspecciones</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="inspector : ${inspectores}">
+              <th scope="row" th:text="${inspector.getLegajo}"></th>
+              <td th:text="${inspector.getNombre}"></td>
+              <td th:text="${inspector.getApellido}"></td>
+              <td th:text="${inspector.getEmail}"></td>
+              <td th:text="${inspector.getTelefono}"></td>
+              <td class="align-middle">
+                <a
+                  class="btn btn-info"
+                  th:href="@{/inspectores/{legajo}(legajo=${inspector.getLegajo})}"
+                  role="button"
+                  >Ver Inspecciones</a
+                >
+              </td>
+              <td>
+                <a
+                  class="btn btn-warning btn-sm"
+                  th:href="@{/inspectores/update/{legajo}(legajo=${inspector.getLegajo})}"
+                  role="button"
+                  >Editar</a
+                >
+                <a
+                  class="btn btn-danger btn-sm"
+                  th:href="@{/inspectores/delete/{legajo}(legajo=${inspector.getLegajo})}"
+                  role="button"
+                  >Eliminar</a
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div th:replace="layout :: scripts"></div>
+  </body>
+</html>

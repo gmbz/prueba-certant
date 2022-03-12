@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="layout :: head"> </head>
+  <body>
+    <header th:replace="layout :: header"></header>
+
+    <div class="container">
+      <h2 class="text-center">Editar observacion</h2>
+      <div class="row d-flex justify-content-center">
+        <form
+          th:action="@{/inspecciones/update/observacion}"
+          th:object="${inspeccion}"
+          method="POST"
+          class="col-12"
+        >
+          <input
+            type="hidden"
+            class="form-control"
+            th:field="*{nro_inspeccion}"
+            th:placeholder="${inspeccion.getNro_inspeccion}"
+            th:value="${inspeccion.getNro_inspeccion}"
+          />
+          <div class="form-group">
+            <label for="inputLuces">Luces</label>
+            <select
+              th:field="*{observacion.luces}"
+              id="inputLuces"
+              class="form-control"
+            >
+              <option
+                th:each="opcion : ${opciones}"
+                th:value="${opcion}"
+                th:text="${opcion}"
+              ></option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="inputPatente">Patente</label>
+            <select
+              th:field="*{observacion.patente}"
+              id="inputPatente"
+              class="form-control"
+            >
+              <option
+                th:each="opcion : ${opciones}"
+                th:value="${opcion}"
+                th:text="${opcion}"
+              ></option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="inputEspejos">Espejos</label>
+            <select
+              th:field="*{observacion.espejos}"
+              id="inputEspejos"
+              class="form-control"
+            >
+              <option
+                th:each="opcion : ${opciones}"
+                th:value="${opcion}"
+                th:text="${opcion}"
+              ></option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="inputChasis">Chasis</label>
+            <select
+              th:field="*{observacion.chasis}"
+              id="inputChasis"
+              class="form-control"
+            >
+              <option
+                th:each="opcion : ${opciones}"
+                th:value="${opcion}"
+                th:text="${opcion}"
+              ></option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="inputVidrios">Vidrios y Seguridad</label>
+            <select
+              th:field="*{observacion.vidrios_seguridad}"
+              id="inputVidrios"
+              class="form-control"
+            >
+              <option
+                th:each="opcion : ${opciones}"
+                th:value="${opcion}"
+                th:text="${opcion}"
+              ></option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="inputEmergencia">Emergencia</label>
+            <select
+              th:field="*{observacion.emergencia}"
+              id="inputEmergencia"
+              class="form-control"
+            >
+              <option
+                th:each="opcion : ${opciones}"
+                th:value="${opcion}"
+                th:text="${opcion}"
+              ></option>
+            </select>
+          </div>
+          <div class="d-flex justify-content-center mt-3">
+            <button type="submit" class="btn btn-dark">
+              Actualizar observacion
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div th:replace="layout :: scripts"></div>
+  </body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="layout :: head"> </head>
+  <body>
+    <header th:replace="layout :: header"></header>
+
+    <div class="container">
+      <div class="d-flex flex-row pt-2 justify-content-between">
+        <h2 class="d-inline-flex align-middle flex-column">
+          Listado de estados de vehiculos
+        </h2>
+      </div>
+      <div class="card shadow-sm">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Patente</th>
+              <th scope="col">Marca</th>
+              <th scope="col">Modelo</th>
+              <th scope="col">Dueño</th>
+              <th scope="col">Estado</th>
+              <th scope="col">Oblea</th>
+              <th scope="col">Fecha vencimiento</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="inspeccion : ${inspecciones}">
+              <th
+                scope="row"
+                th:text="${inspeccion.getVehiculo().getPatente}"
+              ></th>
+              <td th:text="${inspeccion.getVehiculo().getMarca}"></td>
+              <td th:text="${inspeccion.getVehiculo().getModelo}"></td>
+              <td
+                th:text="${inspeccion.getVehiculo().getCliente().getNombre}"
+              ></td>
+              <td th:text="${inspeccion.getEstado().getDescripcion}"></td>
+              <td>
+                <span
+                  th:if="${inspeccion.getEstado().getDescripcion=='APTO'}"
+                  th:text="${inspeccion.getVehiculo().getOblea().getNro_oblea}"
+                ></span>
+              </td>
+              <td>
+                <span
+                  th:text="${#temporals.format(inspeccion.getVehiculo().getOblea().getFecha_vencimiento(), 'dd-MM-yyyy HH:mm')}"
+                  th:if="${inspeccion.getEstado().getDescripcion=='APTO'}"
+                >
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div th:replace="layout :: scripts"></div>
+  </body>
+</html>
