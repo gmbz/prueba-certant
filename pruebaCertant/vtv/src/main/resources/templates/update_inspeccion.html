@@ -29,7 +29,7 @@
             >
               <option
                 th:each="inspector : ${inspectores}"
-                th:value="${inspector.getLegajo}"
+                th:value="${inspector.getDni}"
                 th:text="${inspector.getNombre} + ' ' + ${inspector.getApellido}"
               ></option>
             </select>

@@ -34,10 +34,10 @@ public class ClienteApi {
     }
 
     @GetMapping("/{id_cliente}")
-    public ResponseEntity<?> getOne(@PathVariable int id_cliente) {
+    public ResponseEntity<?> getOne(@PathVariable String dni_cliente) {
         try {
             Cliente cliente = new Cliente();
-            cliente.setId_cliente(id_cliente);
+            cliente.setDni(dni_cliente);
             return ResponseEntity.status(HttpStatus.OK).body(clienteController.findById(clienteService, cliente));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error\"}");
@@ -47,7 +47,6 @@ public class ClienteApi {
     @PostMapping("")
     public ResponseEntity<?> save(@RequestBody Cliente cliente) {
         try {
-            System.out.println(cliente.getId_cliente());
             return ResponseEntity.status(HttpStatus.OK).body(clienteController.save(clienteService, cliente));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error\"}");
@@ -55,7 +54,7 @@ public class ClienteApi {
     }
 
     @PutMapping("/{id_cliente}")
-    public ResponseEntity<?> update(@PathVariable int id_cliente, @RequestBody Cliente cliente) {
+    public ResponseEntity<?> update(@PathVariable String dni_cliente, @RequestBody Cliente cliente) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(clienteController.update(clienteService, cliente));
         } catch (Exception e) {
@@ -64,10 +63,10 @@ public class ClienteApi {
     }
 
     @DeleteMapping("/{id_cliente}")
-    public ResponseEntity<?> delete(@PathVariable int id_cliente) {
+    public ResponseEntity<?> delete(@PathVariable String dni_cliente) {
         try {
             Cliente cliente = new Cliente();
-            cliente.setId_cliente(id_cliente);
+            cliente.setDni(dni_cliente);
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body(clienteController.delete(clienteService, cliente));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error\"}");

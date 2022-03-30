@@ -14,10 +14,9 @@
         <table class="table table-hover">
           <thead>
             <tr>
-              <th scope="col">#</th>
+              <th scope="col">DNI</th>
               <th scope="col">Nombre</th>
               <th scope="col">Apellido</th>
-              <th scope="col">DNI</th>
               <th scope="col">Email</th>
               <th scope="col">Telefono</th>
               <th scope="col">Datos</th>
@@ -26,16 +25,15 @@
           </thead>
           <tbody>
             <tr th:each="cliente : ${clientes}">
-              <th scope="row" th:text="${cliente.getId_cliente}"></th>
+              <th scope="row" th:text="${cliente.getDni}"></th>
               <td th:text="${cliente.getNombre}"></td>
               <td th:text="${cliente.getApellido}"></td>
-              <td th:text="${cliente.getDni}"></td>
               <td th:text="${cliente.getEmail}"></td>
               <td th:text="${cliente.getTelefono}"></td>
               <td>
                 <a
                   class="btn btn-info btn-sm"
-                  th:href="@{/clientes/{id_cliente}(id_cliente=${cliente.getId_cliente})}"
+                  th:href="@{/clientes/{dni_cliente}(dni_cliente=${cliente.getDni})}"
                   role="button"
                   >VER</a
                 >
@@ -43,13 +41,13 @@
               <td>
                 <a
                   class="btn btn-warning btn-sm"
-                  th:href="@{/clientes/update/{id_cliente}(id_cliente=${cliente.getId_cliente})}"
+                  th:href="@{/clientes/update/{dni_cliente}(dni_cliente=${cliente.getDni})}"
                   role="button"
                   >Editar</a
                 >
                 <a
                   class="btn btn-danger btn-sm"
-                  th:href="@{/clientes/delete/{id_cliente}(id_cliente=${cliente.getId_cliente})}"
+                  th:href="@{/clientes/delete/{dni_cliente}(dni_cliente=${cliente.getDni})}"
                   role="button"
                   >Eliminar</a
                 >

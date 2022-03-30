@@ -16,6 +16,13 @@
           <input
             type="hidden"
             class="form-control"
+            th:field="*{dni}"
+            th:placeholder="${inspector.getDni}"
+            th:value="${inspector.getDni}"
+          />
+          <input
+            type="hidden"
+            class="form-control"
             th:field="*{legajo}"
             th:placeholder="${inspector.getLegajo}"
             th:value="${inspector.getLegajo}"

@@ -28,8 +28,12 @@
                 scope="row"
                 th:text="${inspeccion.getVehiculo().getPatente}"
               ></th>
-              <td th:text="${inspeccion.getVehiculo().getMarca}"></td>
-              <td th:text="${inspeccion.getVehiculo().getModelo}"></td>
+              <td
+                th:text="${inspeccion.getVehiculo().getModelo().getMarca().getNombre()}"
+              ></td>
+              <td
+                th:text="${inspeccion.getVehiculo().getModelo().getNombre()}"
+              ></td>
               <td
                 th:text="${inspeccion.getVehiculo().getCliente().getNombre}"
               ></td>

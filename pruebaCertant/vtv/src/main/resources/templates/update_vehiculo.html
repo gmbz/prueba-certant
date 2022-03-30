@@ -20,29 +20,16 @@
             th:placeholder="${vehiculo.getPatente}"
             th:value="${vehiculo.getPatente}"
           />
-          <div class="form-row">
-            <div class="form-group col">
-              <label for="inputMarca">Nuevo marca</label>
-              <input
-                type="text"
-                class="form-control"
-                id="inputMarca"
-                th:field="*{marca}"
-                th:placeholder="${vehiculo.getMarca}"
-                th:value="${vehiculo.getMarca}"
-              />
-            </div>
-            <div class="form-group col">
-              <label for="inputModelo">Nuevo modelo</label>
-              <input
-                type="text"
-                class="form-control"
-                id="inputApellido"
-                th:field="*{modelo}"
-                th:placeholder="${vehiculo.getModelo}"
-                th:value="${vehiculo.getModelo}"
-              />
-            </div>
+
+          <div class="form-group">
+            <label for="inputModelo">Modelo</label>
+            <select th:field="*{modelo}" id="inputModelo" class="form-control">
+              <option
+                th:each="modelo : ${marca.getModelos()}"
+                th:value="${modelo.getId_modelo()}"
+                th:text="${modelo.getNombre()}"
+              ></option>
+            </select>
           </div>
 
           <div class="form-group">
@@ -76,7 +63,7 @@
             >
               <option
                 th:each="cliente : ${clientes}"
-                th:value="${cliente.getId_cliente}"
+                th:value="${cliente.getDni}"
                 th:text="${cliente.getNombre} + ' ' + ${cliente.getApellido}"
               ></option>
             </select>

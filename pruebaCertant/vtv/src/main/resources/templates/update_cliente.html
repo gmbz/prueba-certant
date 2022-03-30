@@ -16,9 +16,9 @@
           <input
             type="hidden"
             class="form-control"
-            th:field="*{id_cliente}"
-            th:placeholder="${cliente.getId_cliente}"
-            th:value="${cliente.getId_cliente}"
+            th:field="*{dni}"
+            th:placeholder="${cliente.getDni}"
+            th:value="${cliente.getDni}"
           />
           <div class="form-row">
             <div class="form-group col">
@@ -43,18 +43,6 @@
                 th:value="${cliente.getApellido}"
               />
             </div>
-          </div>
-
-          <div class="form-group">
-            <label for="inputDNI">Nuevo DNI</label>
-            <input
-              type="text"
-              class="form-control"
-              id="inputDNI"
-              th:field="*{dni}"
-              th:placeholder="${cliente.getDni}"
-              th:value="${cliente.getDni}"
-            />
           </div>
           <div class="form-group">
             <label for="inputEmail">Nuevo email</label>

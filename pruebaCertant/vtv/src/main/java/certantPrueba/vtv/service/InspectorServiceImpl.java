@@ -28,7 +28,7 @@ public class InspectorServiceImpl implements IInspectorService {
     @Override
     public Inspector findById(Inspector inspector) throws Exception {
         try {
-            Optional<Inspector> entity = inspectorRepository.findById(inspector.getLegajo());
+            Optional<Inspector> entity = inspectorRepository.findById(inspector.getDni());
             return entity.get();
         } catch (Exception e) {
             throw new Exception(e.getMessage());
@@ -56,8 +56,17 @@ public class InspectorServiceImpl implements IInspectorService {
     @Override
     public boolean delete(Inspector inspector) throws Exception {
         try {
-            inspectorRepository.deleteById(inspector.getLegajo());
+            inspectorRepository.deleteById(inspector.getDni());
             return true;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+    public int findFirstOrderByLegajo() throws Exception {
+        try {
+            return inspectorRepository.findFirstOrderByLegajo();
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }

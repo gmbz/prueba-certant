@@ -21,6 +21,7 @@ public class InspectorController {
     }
 
     public Inspector save(IInspectorService inspectorService, Inspector inspector) throws Exception {
+        inspector.generaLegajo(inspectorService.findFirstOrderByLegajo());
         return inspectorService.save(inspector);
     }
 

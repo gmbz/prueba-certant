@@ -61,18 +61,18 @@ public class Inspectores {
         return "redirect:/inspectores";
     }
 
-    @GetMapping("/delete/{legajo}")
-    public String borrarInspector(@PathVariable("legajo") int legajo, Model model) throws Exception {
+    @GetMapping("/delete/{dni_inspector}")
+    public String borrarInspector(@PathVariable("dni_inspector") String dni_inspector, Model model) throws Exception {
         Inspector inspector = new Inspector();
-        inspector.setLegajo(legajo);
+        inspector.setDni(dni_inspector);
         inspectorController.delete(inspectorService, inspector);
         return "redirect:/inspectores/";
     }
 
-    @GetMapping("/update/{legajo}")
-    public String editarInspector(@PathVariable("legajo") int legajo, Model model) throws Exception {
+    @GetMapping("/update/{dni_inspector}")
+    public String editarInspector(@PathVariable("dni_inspector") String dni_inspector, Model model) throws Exception {
         Inspector inspector = new Inspector();
-        inspector.setLegajo(legajo);
+        inspector.setDni(dni_inspector);
         Inspector inspectorActualizar = inspectorController.findById(inspectorService, inspector);
         model.addAttribute("inspector", inspectorActualizar);
         model.addAttribute("titulo", "Editar inspector");
@@ -85,10 +85,10 @@ public class Inspectores {
         return "redirect:/inspectores";
     }
 
-    @GetMapping("/{legajo}")
-    public String getLastThreeDays(@PathVariable("legajo") int legajo, Model model) throws Exception {
+    @GetMapping("/{dni_inspector}")
+    public String getLastThreeDays(@PathVariable("dni_inspector") String dni_inspector, Model model) throws Exception {
         Inspector ins = new Inspector();
-        ins.setLegajo(legajo);
+        ins.setDni(dni_inspector);
         Inspector inspector = inspectorController.findById(inspectorService, ins);
         List<Inspeccion> inspecciones = inspectorController.inspeccionesUltimosTresDias(inspeccionService, inspector);
         model.addAttribute("inspector", inspector);

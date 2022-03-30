@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository;
 import certantPrueba.vtv.model.Cliente;
 
 @Repository
-public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
+public interface ClienteRepository extends JpaRepository<Cliente, String> {
 
-    @Query(nativeQuery = true, value = "SELECT COUNT(v.patente) FROM cliente AS c INNER JOIN vehiculo AS v ON c.id_cliente=v.id_cliente WHERE c.id_cliente=:id")
-    Integer countVehiculos(@Param("id") int id_cliente);
+    @Query(nativeQuery = true, value = "SELECT COUNT(v.patente) FROM cliente AS c INNER JOIN vehiculo AS v ON c.dni=v.dni WHERE c.dni=:dni")
+    Integer countVehiculos(@Param("dni") String dni);
 }

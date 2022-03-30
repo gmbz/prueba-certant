@@ -26,8 +26,8 @@
           <tbody>
             <tr th:each="vehiculo : ${vehiculos}">
               <th scope="row" th:text="${vehiculo.getPatente}"></th>
-              <td th:text="${vehiculo.getMarca}"></td>
-              <td th:text="${vehiculo.getModelo}"></td>
+              <td th:text="${vehiculo.getModelo().getMarca().getNombre()}"></td>
+              <td th:text="${vehiculo.getModelo().getNombre()}"></td>
               <td th:text="${vehiculo.getYear}"></td>
               <td th:text="${vehiculo.getColor}"></td>
               <td th:text="${vehiculo.getCliente().getNombre}"></td>

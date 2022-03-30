@@ -49,16 +49,14 @@ public class Clientes {
         return "show_clientes";
     }
 
-    @GetMapping("/{id_cliente}")
-    public String getOne(@PathVariable("id_cliente") int id_cliente, Model model) throws Exception {
+    @GetMapping("/{dni_cliente}")
+    public String getOne(@PathVariable("dni_cliente") String dni_cliente, Model model) throws Exception {
         Cliente cli = new Cliente();
-        cli.setId_cliente(id_cliente);
+        cli.setDni(dni_cliente);
         Cliente cliente = clienteController.findById(clienteService, cli);
         List<Inspeccion> inspecciones = clienteController.getInspecciones(inspeccionService, clienteService, cliente);
         List<Vehiculo> vehiculos = clienteController.findAllbyCliente(vehiculoService, cliente);
 
-        System.out.println("===================================");
-        System.out.println(vehiculos);
         model.addAttribute("vehiculos", vehiculos);
         model.addAttribute("inspecciones", inspecciones);
         model.addAttribute("cliente", cliente);
@@ -77,7 +75,8 @@ public class Clientes {
     }
 
     @PostMapping("/create")
-    public String createCliente(@Valid @ModelAttribute Cliente cliente, BindingResult result, Model model)
+    public String createCliente(@Valid @ModelAttribute Cliente cliente, BindingResult result,
+            Model model)
             throws Exception {
 
         if (result.hasErrors()) {
@@ -92,18 +91,18 @@ public class Clientes {
         return "redirect:/clientes/";
     }
 
-    @GetMapping("/delete/{id_cliente}")
-    public String borrarCliente(@PathVariable("id_cliente") int id_cliente, Model model) throws Exception {
+    @GetMapping("/delete/{dni_cliente}")
+    public String borrarCliente(@PathVariable("dni_cliente") String dni_cliente, Model model) throws Exception {
         Cliente cliente = new Cliente();
-        cliente.setId_cliente(id_cliente);
+        cliente.setDni(dni_cliente);
         clienteController.delete(clienteService, cliente);
         return "redirect:/clientes/";
     }
 
-    @GetMapping("/update/{id_cliente}")
-    public String editarCliente(@PathVariable("id_cliente") int id_cliente, Model model) throws Exception {
+    @GetMapping("/update/{dni_cliente}")
+    public String editarCliente(@PathVariable("dni_cliente") String dni_cliente, Model model) throws Exception {
         Cliente cliente = new Cliente();
-        cliente.setId_cliente(id_cliente);
+        cliente.setDni(dni_cliente);
         Cliente clienteActualizar = clienteController.findById(clienteService, cliente);
         List<TipoCliente> tipos = tipoClienteService.findAll();
         model.addAttribute("cliente", clienteActualizar);

@@ -5,7 +5,6 @@
     <header th:replace="layout :: header"></header>
 
     <div class="container">
-      <h2 class="text-center">Nuevo vehiculo</h2>
       <div class="row d-flex justify-content-center">
         <form
           th:action="@{/vehiculos/create}"
@@ -13,66 +12,35 @@
           method="POST"
           class="col-12"
         >
-          <div class="form-row">
-            <div class="form-group col">
-              <label for="inputPatente">Patente</label>
-              <input
-                type="text"
-                class="form-control"
-                id="inputPatente"
-                placeholder="Ingresar patente"
-                th:field="*{patente}"
-              />
-              <small
-                class="form-text text-danger"
-                th:if="${#fields.hasErrors('patente')}"
-                th:errors="*{patente}"
-              ></small>
-            </div>
-            <div class="form-group col">
-              <label for="inputMarca">Marca</label>
-              <input
-                type="text"
-                class="form-control"
-                id="inputMarca"
-                placeholder="Ingresar marca"
-                th:field="*{marca}"
-              />
-              <small
-                class="form-text text-danger"
-                th:if="${#fields.hasErrors('marca')}"
-                th:errors="*{marca}"
-              ></small>
-            </div>
-          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="marcaVehiculo"
+            th:value="${marca.getId_marca()}"
+          />
           <div class="form-group">
             <label for="inputModelo">Modelo</label>
-            <input
-              type="text"
-              class="form-control"
-              id="inputModelo"
-              placeholder="Ingresar modelo"
-              th:field="*{modelo}"
-            />
-            <small
-              class="form-text text-danger"
-              th:if="${#fields.hasErrors('modelo')}"
-              th:errors="*{modelo}"
-            ></small>
+            <select th:field="*{modelo}" id="inputModelo" class="form-control">
+              <option
+                th:each="modelo : ${marca.getModelos()}"
+                th:value="${modelo.getId_modelo()}"
+                th:text="${modelo.getNombre()}"
+              ></option>
+            </select>
           </div>
           <div class="form-group">
-            <label for="inputYear">Año</label>
+            <label for="inputPatente">Patente</label>
             <input
               type="text"
               class="form-control"
-              id="inputYear"
-              placeholder="Ingresar año"
-              th:field="*{year}"
+              id="inputPatente"
+              placeholder="Ingresar patente"
+              th:field="*{patente}"
             />
             <small
               class="form-text text-danger"
-              th:if="${#fields.hasErrors('year')}"
-              th:errors="*{year}"
+              th:if="${#fields.hasErrors('patente')}"
+              th:errors="*{patente}"
             ></small>
           </div>
           <div class="form-group">
@@ -91,7 +59,22 @@
             ></small>
           </div>
           <div class="form-group">
-            <label for="inputCliente">Dueño</label>
+            <label for="inputAnio">Año</label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputAnio"
+              placeholder="Ingresar año"
+              th:field="*{year}"
+            />
+            <small
+              class="form-text text-danger"
+              th:if="${#fields.hasErrors('year')}"
+              th:errors="*{year}"
+            ></small>
+          </div>
+          <div class="form-group">
+            <label for="inputCliente">Modelo</label>
             <select
               th:field="*{cliente}"
               id="inputCliente"
@@ -99,8 +82,8 @@
             >
               <option
                 th:each="cliente : ${clientes}"
-                th:value="${cliente.getId_cliente}"
-                th:text="${cliente.getNombre} + ' ' + ${cliente.getApellido}"
+                th:value="${cliente.getDni()}"
+                th:text="${cliente.getNombre() + ' ' + cliente.getApellido()}"
               ></option>
             </select>
           </div>

@@ -14,4 +14,6 @@ public interface IInspectorService {
     public Inspector update(Inspector inspector) throws Exception;
 
     public boolean delete(Inspector inspector) throws Exception;
+
+    public int findFirstOrderByLegajo() throws Exception;
 }

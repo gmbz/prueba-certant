@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="layout :: head"> </head>
+  <body>
+    <header th:replace="layout :: header"></header>
+
+    <div class="container">
+      <h2 class="text-center">Nuevo vehiculo</h2>
+
+      <div class="row">
+        <!-- <div class="d-flex align-items-start"> -->
+        <div
+          class="nav flex-column nav-pills col-4"
+          id="v-pills-tab"
+          role="tablist"
+          aria-orientation="vertical"
+        >
+          <button
+            class="nav-link active"
+            id="autoContent-tab"
+            data-bs-toggle="pill"
+            data-bs-target="#autoContent"
+            type="button"
+            role="tab"
+            aria-controls="autoContent"
+            aria-selected="true"
+          >
+            Auto
+          </button>
+          <button
+            class="nav-link"
+            id="motoContent-tab"
+            data-bs-toggle="pill"
+            data-bs-target="#motoContent"
+            type="button"
+            role="tab"
+            aria-controls="motoContent"
+            aria-selected="false"
+          >
+            Moto
+          </button>
+          <button
+            class="nav-link"
+            id="camionetaContent-tab"
+            data-bs-toggle="pill"
+            data-bs-target="#camionetaContent"
+            type="button"
+            role="tab"
+            aria-controls="camionetaContent"
+            aria-selected="false"
+          >
+            Camioneta
+          </button>
+        </div>
+        <div class="tab-content col-8" id="v-pills-tabContent">
+          <div
+            class="tab-pane fade show active"
+            id="autoContent"
+            role="tabpanel"
+            aria-labelledby="autoContent-tab"
+          >
+            <form
+              th:action="@{/vehiculos/seleccionar_marca}"
+              method="POST"
+              class="col-12"
+            >
+              <div class="form-group">
+                <label for="inputMarca">Marca Auto</label>
+                <select
+                  name="marcaVehiculo"
+                  id="inputMarca"
+                  class="form-control"
+                >
+                  <option
+                    th:each="marca : ${marcasAuto}"
+                    th:value="${marca.getId_marca()}"
+                    th:text="${marca.getNombre()}"
+                  ></option>
+                </select>
+              </div>
+              <div class="d-flex justify-content-center mt-3">
+                <button type="submit" class="btn btn-dark">Seleccionar</button>
+              </div>
+            </form>
+          </div>
+          <div
+            class="tab-pane fade"
+            id="motoContent"
+            role="tabpanel"
+            aria-labelledby="motoContent-tab"
+          >
+            <form
+              th:action="@{/vehiculos/seleccionar_marca}"
+              method="POST"
+              class="col-12"
+            >
+              <div class="form-group">
+                <label for="inputMarca">Marca Moto</label>
+                <select
+                  name="marcaVehiculo"
+                  id="inputMarca"
+                  class="form-control"
+                >
+                  <option
+                    th:each="marca : ${marcasMoto}"
+                    th:value="${marca.getId_marca()}"
+                    th:text="${marca.getNombre()}"
+                  ></option>
+                </select>
+              </div>
+              <div class="d-flex justify-content-center mt-3">
+                <button type="submit" class="btn btn-dark">Seleccionar</button>
+              </div>
+            </form>
+          </div>
+          <div
+            class="tab-pane fade"
+            id="camionetaContent"
+            role="tabpanel"
+            aria-labelledby="camionetaContent-tab"
+          >
+            <form
+              th:action="@{/vehiculos/seleccionar_marca}"
+              method="POST"
+              class="col-12"
+            >
+              <div class="form-group">
+                <label for="inputMarca">Marca Camioneta</label>
+                <select
+                  name="marcaVehiculo"
+                  id="inputMarca"
+                  class="form-control"
+                >
+                  <option
+                    th:each="marca : ${marcasCamioneta}"
+                    th:value="${marca.getId_marca()}"
+                    th:text="${marca.getNombre()}"
+                  ></option>
+                </select>
+              </div>
+              <div class="d-flex justify-content-center mt-3">
+                <button type="submit" class="btn btn-dark">Seleccionar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- </div> -->
+      </div>
+
+      <!-- <div class="row row-cols-1">
+        <div class="list-group col-4" id="grupo-lista" role="tablist">
+          <a href="#autoContent" class="list-group-item list-group-item-action active" data-toggle="list" role="tab" aria-controls="autoContent" id="auto">Auto</a>
+          <a href="#motoContent" class="list-group-item list-group-item-action" data-toggle="list" role="tab" aria-controls="motoContent" id="moto">Moto</a>
+          <a href="#camionetaContent" class="list-group-item list-group-item-action" data-toggle="list" role="tab" aria-controls="camionetaContent" id="camioneta">Camioneta</a>
+        </div>
+        <div class="tab-content col-8" id="contenido-lista">
+          <div class="tab-pane fade active show" role="tabpanel" id="auto-content" aria-labelledby="auto">            
+            <div class="row d-flex justify-content-center">
+              <form
+                action="@{/vehiculos/create}"
+                th:object="${vehiculo}"
+                method="POST"
+                class="col-12"
+              >
+                <div class="form-group">
+                  <label for="inputMarca">Marca Auto</label>
+                  <select name="marcaVehiculo" id="inputMarca" class="form-control">
+                    <option
+                      th:each="marca : ${marcasAuto}"
+                      th:value="${marca.getId_marca()}"
+                      th:text="${marca.getNombre()}"
+                    ></option>
+                  </select>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="tab-pane fade" role="tabpanel" id="motoContent" aria-labelledby="moto">
+            <div class="row d-flex justify-content-center">
+              <form
+                action="@{/vehiculos/create}"
+                th:object="${vehiculo}"
+                method="POST"
+                class="col-12"
+              >
+                <div class="form-group">
+                  <label for="inputMarca">Marca Moto</label>
+                  <select name="marcaVehiculo" id="inputMarca" class="form-control">
+                    <option
+                      th:each="marca : ${marcasMoto}"
+                      th:value="${marca.getId_marca()}"
+                      th:text="${marca.getNombre()}"
+                    ></option>
+                  </select>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="tab-pane fade" role="tabpanel" id="camionetaContent" aria-labelledby="camioneta">
+            <div class="row d-flex justify-content-center">
+              <form
+                action="@{/vehiculos/create}"
+                th:object="${vehiculo}"
+                method="POST"
+                class="col-12"
+              >
+                <div class="form-group">
+                  <label for="inputMarca">Marca Camioneta</label>
+                  <select name="marcaVehiculo" id="inputMarca" class="form-control">
+                    <option
+                      th:each="marca : ${marcasCamioneta}"
+                      th:value="${marca.getId_marca()}"
+                      th:text="${marca.getNombre()}"
+                    ></option>
+                  </select>
+                </div>
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div> -->
+
+      <hr />
+
+      <!-- <div class="row d-flex justify-content-center">
+        <form
+          th:action="@{/vehiculos/create}"
+          th:object="${vehiculo}"
+          method="POST"
+          class="col-12"
+        >
+          <div class="form-row">
+            <div class="form-group">
+              <label for="inputVehiculo">Tipo Vehiculo</label>
+              <select
+                name="tipoVehiculo"
+                id="inputVehiculo"
+                class="form-control"
+              >
+                <option
+                  th:each="tipo : ${tipos_vehiculo}"
+                  th:value="${tipo.getTipo_vehiculo()}"
+                  th:text="${tipo.getTipo_vehiculo()}"
+                ></option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="inputMarca">Marca</label>
+              <select name="marcaVehiculo" id="inputMarca" class="form-control">
+                <option
+                  th:each="marca : ${marcas}"
+                  th:value="${marca.getId_marca()}"
+                  th:text="${marca.getNombre()}"
+                ></option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="inputModelo">Modelo</label>
+              <select
+                th:field="*{modelo}"
+                id="inputModelo"
+                class="form-control"
+              >
+                <option
+                  th:each="modelo : ${modelos}"
+                  th:value="${modelo.getId_modelo()}"
+                  th:text="${modelo.getNombre()}"
+                ></option>
+              </select>
+            </div>
+
+            <div class="form-group col">
+              <label for="inputPatente">Patente</label>
+              <input
+                type="text"
+                class="form-control"
+                id="inputPatente"
+                placeholder="Ingresar patente"
+                th:field="*{patente}"
+              />
+              <small
+                class="form-text text-danger"
+                th:if="${#fields.hasErrors('patente')}"
+                th:errors="*{patente}"
+              ></small>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputYear">Año</label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputYear"
+              placeholder="Ingresar año"
+              th:field="*{year}"
+            />
+            <small
+              class="form-text text-danger"
+              th:if="${#fields.hasErrors('year')}"
+              th:errors="*{year}"
+            ></small>
+          </div>
+          <div class="form-group">
+            <label for="inputColor">Color</label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputColor"
+              placeholder="Ingresar color"
+              th:field="*{color}"
+            />
+            <small
+              class="form-text text-danger"
+              th:if="${#fields.hasErrors('color')}"
+              th:errors="*{color}"
+            ></small>
+          </div>
+          <div class="form-group">
+            <label for="inputCliente">Dueño</label>
+            <select
+              th:field="*{cliente}"
+              id="inputCliente"
+              class="form-control"
+            >
+              <option
+                th:each="cliente : ${clientes}"
+                th:value="${cliente.getDni}"
+                th:text="${cliente.getNombre} + ' ' + ${cliente.getApellido}"
+              ></option>
+            </select>
+          </div>
+          <div class="d-flex justify-content-center mt-3">
+            <button type="submit" class="btn btn-dark">
+              Registrar vehiculo
+            </button>
+          </div>
+        </form>
+      </div> -->
+    </div>
+
+    <div th:replace="layout :: scripts"></div>
+  </body>
+</html>

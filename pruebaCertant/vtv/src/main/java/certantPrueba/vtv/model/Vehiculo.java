@@ -7,6 +7,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -14,34 +16,43 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import certantPrueba.vtv.validator.PatenteVehiculo;
+
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "vehiculo")
 public class Vehiculo {
 
     @Id
     @Column(name = "patente")
-    @NotEmpty
+    @NotEmpty(message = "La patente es requerida")
+    @PatenteVehiculo
     private String patente;
-    @Column(name = "marca")
-    @NotEmpty
-    private String marca;
-    @Column(name = "modelo")
-    @NotEmpty
-    private String modelo;
     @Column(name = "color")
-    @NotEmpty
+    @NotEmpty(message = "El color es requerido")
     private String color;
     @Column(name = "year")
-    @NotEmpty
+    @NotEmpty(message = "El año es requerido")
     private String year;
+    @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE })
+    @JoinColumn(name = "id_modelo")
+    private Modelo modelo;
     @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH })
-    @JoinColumn(name = "id_cliente")
+    @JoinColumn(name = "dni")
+    @JsonBackReference
     private Cliente cliente;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "nro_oblea")
     private Oblea oblea;
     @OneToMany(mappedBy = "vehiculo", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Inspeccion> inspecciones = new ArrayList<>();
+
+    public Vehiculo() {
+    }
 
     public List<Inspeccion> getInspecciones() {
         return inspecciones;
@@ -57,22 +68,6 @@ public class Vehiculo {
 
     public void setPatente(String patente) {
         this.patente = patente;
-    }
-
-    public String getMarca() {
-        return marca;
-    }
-
-    public void setMarca(String marca) {
-        this.marca = marca;
-    }
-
-    public String getModelo() {
-        return modelo;
-    }
-
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
     }
 
     public String getColor() {
@@ -107,10 +102,14 @@ public class Vehiculo {
         this.oblea = oblea;
     }
 
-    @Override
-    public String toString() {
-        return "Vehiculo [cliente=" + cliente + ", color=" + color + ", marca=" + marca + ", modelo=" + modelo
-                + ", oblea=" + oblea + ", patente=" + patente + ", year=" + year + "]";
+    public Modelo getModelo() {
+        return modelo;
     }
+
+    public void setModelo(Modelo modelo) {
+        this.modelo = modelo;
+    }
+
+    
 
 }

@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "inspeccion")
 public class Inspeccion {
@@ -27,7 +29,7 @@ public class Inspeccion {
     @Column(name = "debe_pagar")
     private boolean debe_pagar;
     @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH })
-    @JoinColumn(name = "legajo")
+    @JoinColumn(name = "dni_inspector")
     private Inspector inspector;
     @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.REFRESH })
     @JoinColumn(name = "id_estado")
@@ -35,6 +37,7 @@ public class Inspeccion {
     @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE,
             CascadeType.REFRESH }, fetch = FetchType.LAZY)
     @JoinColumn(name = "patente")
+    @JsonBackReference
     private Vehiculo vehiculo;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "nro_observacion")

@@ -14,6 +14,7 @@
         <table class="table table-hover">
           <thead>
             <tr>
+              <th scope="col">DNI</th>
               <th scope="col">Legajo</th>
               <th scope="col">Nombre</th>
               <th scope="col">Apellido</th>
@@ -25,7 +26,8 @@
           </thead>
           <tbody>
             <tr th:each="inspector : ${inspectores}">
-              <th scope="row" th:text="${inspector.getLegajo}"></th>
+              <th scope="row" th:text="${inspector.getDni}"></th>
+              <td th:text="${inspector.getLegajo}"></td>
               <td th:text="${inspector.getNombre}"></td>
               <td th:text="${inspector.getApellido}"></td>
               <td th:text="${inspector.getEmail}"></td>
@@ -33,7 +35,7 @@
               <td class="align-middle">
                 <a
                   class="btn btn-info"
-                  th:href="@{/inspectores/{legajo}(legajo=${inspector.getLegajo})}"
+                  th:href="@{/inspectores/{dni_inspector}(dni_inspector=${inspector.getDni})}"
                   role="button"
                   >Ver Inspecciones</a
                 >
@@ -41,13 +43,13 @@
               <td>
                 <a
                   class="btn btn-warning btn-sm"
-                  th:href="@{/inspectores/update/{legajo}(legajo=${inspector.getLegajo})}"
+                  th:href="@{/inspectores/update/{dni_inspector}(dni_inspector=${inspector.getDni})}"
                   role="button"
                   >Editar</a
                 >
                 <a
                   class="btn btn-danger btn-sm"
-                  th:href="@{/inspectores/delete/{legajo}(legajo=${inspector.getLegajo})}"
+                  th:href="@{/inspectores/delete/{dni_inspector}(dni_inspector=${inspector.getDni})}"
                   role="button"
                   >Eliminar</a
                 >

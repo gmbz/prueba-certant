@@ -92,7 +92,7 @@ public class InspeccionServiceImpl implements IInspeccionService {
             throws Exception {
         try {
             List<Inspeccion> inspecciones = inspeccionRepository.findInspectorFechaBetween(fechaInicio, fechaFin,
-                    inspector.getLegajo());
+                    inspector.getDni());
             return inspecciones;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
@@ -102,7 +102,7 @@ public class InspeccionServiceImpl implements IInspeccionService {
     @Override
     public List<Inspeccion> findCliente(Cliente cliente) throws Exception {
         try {
-            List<Inspeccion> inspecciones = inspeccionRepository.findCliente(cliente.getId_cliente());
+            List<Inspeccion> inspecciones = inspeccionRepository.findCliente(cliente.getDni());
             return inspecciones;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
@@ -112,7 +112,7 @@ public class InspeccionServiceImpl implements IInspeccionService {
     @Override
     public Inspeccion findLastInspeccion(Cliente cliente, Inspeccion inspeccion) throws Exception {
         try {
-            Inspeccion entity = inspeccionRepository.findLastInspeccion(cliente.getId_cliente(),
+            Inspeccion entity = inspeccionRepository.findLastInspeccion(cliente.getDni(),
                     inspeccion.getNro_inspeccion());
             return entity;
         } catch (Exception e) {

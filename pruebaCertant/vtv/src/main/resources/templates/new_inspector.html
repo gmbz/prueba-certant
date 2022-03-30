@@ -46,6 +46,21 @@
             </div>
           </div>
           <div class="form-group">
+            <label for="inputDNI">DNI</label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputDNI"
+              placeholder="Ingresar DNI"
+              th:field="*{dni}"
+            />
+            <small
+              class="form-text text-danger"
+              th:if="${#fields.hasErrors('dni')}"
+              th:errors="*{dni}"
+            ></small>
+          </div>
+          <div class="form-group">
             <label for="inputEmail">Email</label>
             <input
               type="text"
