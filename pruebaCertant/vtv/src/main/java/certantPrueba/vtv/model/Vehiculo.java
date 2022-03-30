@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -17,13 +18,19 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import certantPrueba.vtv.validator.PatenteVehiculo;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "vehiculo")
+// @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
+// property = "patente")
 public class Vehiculo {
 
     @Id
@@ -39,16 +46,20 @@ public class Vehiculo {
     private String year;
     @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE })
     @JoinColumn(name = "id_modelo")
+    // @JsonBackReference
     private Modelo modelo;
-    @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH })
+    @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE,
+            CascadeType.REFRESH }, fetch = FetchType.LAZY)
     @JoinColumn(name = "dni")
-    @JsonBackReference
+    // @JsonBackReference
+    @JsonIgnoreProperties(value = { "applications", "hibernateLazyInitializer" })
     private Cliente cliente;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "nro_oblea")
     private Oblea oblea;
     @OneToMany(mappedBy = "vehiculo", cascade = CascadeType.ALL)
-    @JsonManagedReference
+    //@JsonManagedReference
+    @JsonIgnore
     private List<Inspeccion> inspecciones = new ArrayList<>();
 
     public Vehiculo() {
@@ -109,7 +120,5 @@ public class Vehiculo {
     public void setModelo(Modelo modelo) {
         this.modelo = modelo;
     }
-
-    
 
 }

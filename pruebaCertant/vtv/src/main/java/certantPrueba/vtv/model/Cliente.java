@@ -5,23 +5,30 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "cliente")
+// @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
+// property = "dni")
 public class Cliente extends Persona {
 
     @ManyToOne(cascade = { CascadeType.REFRESH, CascadeType.MERGE })
     @JoinColumn(name = "id_tipo")
     private TipoCliente tipo;
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    // @JsonManagedReference
+    // @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+    @JsonIgnore
     private List<Vehiculo> vehiculos = new ArrayList<>();
 
     public Cliente() {

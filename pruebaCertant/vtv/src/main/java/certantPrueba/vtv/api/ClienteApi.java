@@ -1,5 +1,9 @@
 package certantPrueba.vtv.api;
 
+import java.util.List;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +37,7 @@ public class ClienteApi {
         }
     }
 
-    @GetMapping("/{id_cliente}")
+    @GetMapping("/{dni_cliente}")
     public ResponseEntity<?> getOne(@PathVariable String dni_cliente) {
         try {
             Cliente cliente = new Cliente();
@@ -53,7 +57,7 @@ public class ClienteApi {
         }
     }
 
-    @PutMapping("/{id_cliente}")
+    @PutMapping("/{dni_cliente}")
     public ResponseEntity<?> update(@PathVariable String dni_cliente, @RequestBody Cliente cliente) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(clienteController.update(clienteService, cliente));
@@ -62,7 +66,7 @@ public class ClienteApi {
         }
     }
 
-    @DeleteMapping("/{id_cliente}")
+    @DeleteMapping("/{dni_cliente}")
     public ResponseEntity<?> delete(@PathVariable String dni_cliente) {
         try {
             Cliente cliente = new Cliente();

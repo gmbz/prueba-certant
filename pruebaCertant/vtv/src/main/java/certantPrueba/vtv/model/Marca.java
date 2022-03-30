@@ -14,6 +14,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "marca")
 public class Marca {
@@ -28,6 +31,8 @@ public class Marca {
     @JoinColumn(name = "id_tipo_vehiculo")
     private TipoVehiculo tipo_vehiculo;
     @OneToMany(mappedBy = "marca", cascade = CascadeType.ALL)
+    // @JsonManagedReference
+    @JsonIgnore
     private List<Modelo> modelos;
 
     public Marca() {

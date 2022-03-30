@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "modelo")
 public class Modelo {
@@ -26,9 +28,11 @@ public class Modelo {
     private String nombre;
     @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH })
     @JoinColumn(name = "marca")
+    @JsonBackReference
     private Marca marca;
     @OneToMany(mappedBy = "modelo", cascade = { CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH,
             CascadeType.MERGE })
+    @JsonBackReference
     private List<Vehiculo> vehiculos;
 
     public Modelo() {
